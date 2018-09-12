@@ -1,0 +1,6 @@
+[package]
+name = "coniferous"
+version = "0.0.1"
+authors = ["Erik A. Partridge <erik.partridge@mail.mcgill.ca>"]
+
+[dependencies]
