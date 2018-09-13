@@ -6,7 +6,6 @@ license = "MIT"
 homepage = "https://coniferous.erikpartridge.com"
 repository = "https://github.com/ErikPartridge/coniferous"
 categories = ["science"]
-keywords = ["decision tree", "random forest", "machine learning", "decision trees"]
 
 [badges]
 maintenance = { status = "experimental" }
