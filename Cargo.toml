@@ -16,3 +16,4 @@ is-it-maintained-open-issues = { repository = "ErikPartridge/coniferous" }
 travis-ci = { repository = "ErikPartridge/coniferous", branch = "master" }
 
 [dependencies]
+rayon = "1.0"
