@@ -59,14 +59,25 @@ impl DecisionTree {
     }
 
 
+    fn traverse(node: &Node, matrix: &Vec<f64>) -> u64 {
+        match DecisionTree::eval_node(node, matrix) {
+            true => match node.l {
+                Some(ref n) => DecisionTree::traverse(&n, matrix),
+                _ => return node.category.unwrap()
+            },
+            false => match node.r {
+                Some(ref n) => DecisionTree::traverse(&n, matrix),
+                _ => return node.category.unwrap()
+            }
+        }
+    }
     /// Given a vector of x values, predict the corresponding category. Requires that the decision tree has already been fit.
     /// 
     /// ### In Review
     /// Should this method potentially take a reference as opposed to ownership?
     /// 
-    /// 
     pub fn predict(&self, x: Vec<f64>) -> u64 {
-        return 0;
+        return DecisionTree::traverse(&self.root_node, &x);
     }
 
     ///
@@ -221,4 +232,17 @@ mod tests {
         assert!(root_node.l.is_some());
         assert!(root_node.r.is_some());
     }
+
+    #[test]
+    fn test_decision_tree() {
+        let vector = vec![
+            vec![0.0, 0.0],
+            vec![1.0, 0.0],
+            vec![0.0, 0.0]
+        ];
+        let dt = DecisionTree::fit(vector, vec![0,1,0]);
+        let res = dt.predict(vec![0.0, 0.0]);
+        assert_eq!(res, 0);
+    }
+
 }
