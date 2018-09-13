@@ -1,6 +1,13 @@
 # coniferous
 Decision trees and random forests for Rust
 
-Presently, an experimental WIP until version 0.1 at which point the API will begin to be useable.
+This is an exceedingly experimental package. Please do not use it for any sort of usage that requires stability until version 0.5.
 
-Planning to implement both CART and ID3 for Decision Trees as well as RandomForests. Presently only supporting decision trees for classification.
+I will release at the following steps, each hopefully being vaguely stable once it is released.
+
+0.2 = CART
+0.3 = ID3
+0.4 = RandomForest
+0.5 = Stabilized all three
+
+Docs are available at [Docs.rs](https://docs.rs/coniferous)
