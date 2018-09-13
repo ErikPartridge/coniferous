@@ -11,9 +11,8 @@ readme = "README.md"
 
 [badges]
 maintenance = { status = "experimental" }
-is-it-maintained-issue-resolution = { repository = "https://github.com/ErikPartridge/coniferous" }
-# Is it maintained percentage of open issues: `repository` is required.
-is-it-maintained-open-issues = { repository = "https://github.com/ErikPartridge/coniferous" }
+is-it-maintained-issue-resolution = { repository = "ErikPartridge/coniferous" }
+is-it-maintained-open-issues = { repository = "ErikPartridge/coniferous" }
 travis-ci = { repository = "ErikPartridge/coniferous", branch = "master" }
 
 [dependencies]
