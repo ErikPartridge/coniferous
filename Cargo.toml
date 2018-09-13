@@ -3,8 +3,16 @@ name = "coniferous"
 version = "0.1.0"
 authors = ["Erik A. Partridge <erik.partridge@mail.mcgill.ca>"]
 license = "MIT"
+homepage = "https://coniferous.erikpartridge.com"
+repository = "https://github.com/ErikPartridge/coniferous"
+categories = ["science"]
+keywords = ["decision tree", "random forest", "machine learning", "decision trees"]
+
+[badges]
 maintenance = { status = "experimental" }
 is-it-maintained-issue-resolution = { repository = "https://github.com/ErikPartridge/coniferous" }
 # Is it maintained percentage of open issues: `repository` is required.
 is-it-maintained-open-issues = { repository = "https://github.com/ErikPartridge/coniferous" }
+travis-ci = { repository = "ErikPartridge/coniferous", branch = "master" }
+
 [dependencies]
