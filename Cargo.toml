@@ -1,6 +1,6 @@
 [package]
 name = "coniferous"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Erik A. Partridge <erik.partridge@mail.mcgill.ca>"]
 license = "MIT"
 homepage = "https://coniferous.erikpartridge.com"
@@ -18,3 +18,4 @@ travis-ci = { repository = "ErikPartridge/coniferous", branch = "master" }
 [dependencies]
 rayon = "1.0"
 rand = "0.5"
+parsnip = "*"

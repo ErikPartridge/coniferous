@@ -1,5 +1,6 @@
 extern crate rand;
 extern crate rayon;
+extern crate parsnip;
 
 use rand::Rng;
 use rayon::prelude::*;
@@ -31,37 +32,6 @@ pub struct Node {
 /// The model for a decision tree backed by the CART algorithm. A binary tree.
 pub struct CARTree {
     root_node: Node,
-}
-
-/// Computes the gini impurity for a dataset, we need this for the CART algorithm.
-fn gini(predicted: &Vec<u64>) -> f64 {
-    if predicted.len() == 0 {
-        return 1.0;
-    }
-    fn p_squared(count: u64, len: f64) -> f64 {
-        let p = count as f64 / len;
-        return p * p;
-    }
-
-    let len = predicted.len() as f64;
-    let mut sorted = predicted.clone();
-    sorted.par_sort();
-    let mut prev = std::u64::MAX;
-    let mut sum = 1.0;
-    let mut local_count = 0;
-    while sorted.len() != 0 {
-        let temp = sorted.pop().unwrap();
-        if temp != prev {
-            sum -= p_squared(local_count, len);
-            prev = temp;
-            local_count = 0;
-        }
-        local_count += 1;
-    }
-
-    sum -= p_squared(local_count, len);
-
-    return sum;
 }
 
 fn mode(numbers: &[u64]) -> u64 {
@@ -186,8 +156,8 @@ impl CARTree {
 
     fn weighted_gini(c: Criteria, x: &[Vec<f64>], y: &[u64]) -> f64 {
         let split = CARTree::eval_criteria(&c, x, y);
-        let gini_left = gini(&split.0) * (split.0.len() + 1) as f64;
-        let gini_right = gini(&split.1) * (split.1.len() + 1) as f64;
+        let gini_left = parsnip::gini(&split.0) as f64 * (split.0.len() + 1) as f64;
+        let gini_right = parsnip::gini(&split.1) as f64 * (split.1.len() + 1) as f64;
         return gini_left + gini_right;
     }
 
@@ -221,8 +191,8 @@ impl CARTree {
         }
         let best_choice = CARTree::best_split(x, y, params);
         let split = CARTree::eval_criteria(&best_choice, x, y);
-        let gini_left = gini(&split.0);
-        let gini_right = gini(&split.1);
+        let gini_left = parsnip::gini(&split.0);
+        let gini_right = parsnip::gini(&split.1);
         if gini_left == 0.0 && gini_right == 0.0 {
             let left = Arc::new(Node {
                 value: 0.0,
@@ -297,6 +267,10 @@ impl CARTree {
     }
 }
 
+pub struct ID3Tree {
+    
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -311,17 +285,6 @@ mod tests {
             category: Some(3),
         };
         assert_eq!(CARTree::eval_node(&gte, &vec![0.01]), false);
-    }
-
-    #[test]
-    fn test_gini() {
-        let vec = vec![0, 0, 0, 1];
-        assert_eq!(0.375, gini(&vec));
-        let v2 = vec![0, 0];
-        assert_eq!(0.0, gini(&v2));
-        let mut v3 = vec![0];
-        v3.pop();
-        assert_eq!(1.0, gini(&v3));
     }
 
     #[test]
