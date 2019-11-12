@@ -17,5 +17,5 @@ travis-ci = { repository = "ErikPartridge/coniferous", branch = "master" }
 
 [dependencies]
 rayon = "1.0"
-rand = "0.5"
+rand = "0.7"
 parsnip = "0.1"
